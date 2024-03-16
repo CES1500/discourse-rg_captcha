@@ -1,9 +1,9 @@
 plugins:
-  discourse_reCAPTCHA_enabled:
+  discourse_hCaptcha_enabled:
     default: false
     client: true
-  reCAPTCHA_site_key:
+  hCaptcha_site_key:
     default: ''
     client: true
-  reCAPTCHA_secret_key:
+  hCaptcha_secret_key:
     default: ''

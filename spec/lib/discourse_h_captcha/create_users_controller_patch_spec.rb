@@ -16,45 +16,45 @@ RSpec.describe "Users", type: :request do
     end
 
     before do
-      SiteSetting.discourse_reCAPTCHA_enabled = true
+      SiteSetting.discourse_hCaptcha_enabled = true
       SiteSetting.same_site_cookies = "Lax"
-      SiteSetting.reCAPTCHA_secret_key = "secret-key"
+      SiteSetting.hCaptcha_secret_key = "secret-key"
 
       stub_request(:post, "https://www.recaptcha.net/recaptcha/api/siteverify").with(
         body: {
-          secret: SiteSetting.reCAPTCHA_secret_key,
-          response: "token-from-reCAPTCHA",
+          secret: SiteSetting.hCaptcha_secret_key,
+          response: "token-from-hCaptcha",
         },
       ).to_return(status: 200, body: '{"success":true}', headers: {})
     end
 
-    context "when rg_captcha verification fails" do
+    context "when h_captcha verification fails" do
       before do
         stub_request(:post, "https://www.recaptcha.net/recaptcha/api/siteverify").with(
           body: {
-            secret: SiteSetting.reCAPTCHA_secret_key,
-            response: "token-from-reCAPTCHA",
+            secret: SiteSetting.hCaptcha_secret_key,
+            response: "token-from-hCaptcha",
           },
         ).to_return(status: 200, body: '{"success":false}', headers: {})
       end
 
       it "fails registration" do
-        post "/reCAPTCHA/create.json", params: { token: "token-from-reCAPTCHA" }
+        post "/hcaptcha/create.json", params: { token: "token-from-hCaptcha" }
         post "/u.json", params: user_params
         expect(JSON.parse(response.body)["success"]).to be(false)
       end
     end
 
-    context "when rg_captcha token is missing" do
+    context "when h_captcha token is missing" do
       it "fails registration" do
         post "/u.json", params: user_params
         expect(JSON.parse(response.body)["success"]).to be(false)
       end
     end
 
-    context "when rg_captcha verification is successful" do
+    context "when h_captcha verification is successful" do
       it "succeeds in registration" do
-        post "/reCAPTCHA/create.json", params: { token: "token-from-reCAPTCHA" }
+        post "/hcaptcha/create.json", params: { token: "token-from-hCaptcha" }
         post "/u.json", params: user_params
         expect(JSON.parse(response.body)["success"]).to be(true)
       end
