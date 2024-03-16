@@ -1,0 +1,5 @@
+en:
+  js:
+    discourse_reCAPTCHA:
+      missing_token: "Please complete the reCAPTCHA challenge."
+      placeholder: placeholder

@@ -1,0 +1,6 @@
+en:
+  site_settings:
+    discourse_reCAPTCHA_enabled: "Enable the reCAPTCHA Plugin"
+    reCAPTCHA_site_key: "reCAPTCHA Site Key"
+    reCAPTCHA_secret_key: "reCAPTCHA Secret Key"
+  rg_captcha_verification_failed: "reCAPTCHA verification failed"

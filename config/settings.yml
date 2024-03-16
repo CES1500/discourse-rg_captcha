@@ -1,0 +1,9 @@
+plugins:
+  discourse_reCAPTCHA_enabled:
+    default: false
+    client: true
+  reCAPTCHA_site_key:
+    default: ''
+    client: true
+  reCAPTCHA_secret_key:
+    default: ''

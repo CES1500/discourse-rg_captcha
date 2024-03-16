@@ -1,0 +1,5 @@
+<div id="rg-captcha-field" class="rg-captcha" data-sitekey={{@sitekey}}></div>
+
+{{#if this.reCAPTCHAService.submitFailed}}
+  <InputTip @validation={{this.reCAPTCHAService.inputValidation}} />
+{{/if}}
